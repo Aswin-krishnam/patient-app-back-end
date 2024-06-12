@@ -34,6 +34,19 @@ app.post("/viewall", (req, res) => {
 
 })
 
+app.post("/search", (req, res) => {
+    let input=req.body
+    patientModel.find(input).then(
+        (data)=>{
+            res.json(data)
+        }
+    ).catch(
+        (error)=>{
+            res.json(error)
+        }
+    )
+    
+})
 
 app.listen(8080, () => {
     console.log("server started")
