@@ -48,6 +48,19 @@ app.post("/search", (req, res) => {
     
 })
 
+app.post("/delete",(req,res)=>{
+    let input=req.body
+    patientModel.findByIdAndDelete(input._id).then(
+        ()=>{
+            res.json({"status":"success"})
+        }
+    ).catch(
+        ()=>{
+            res.json({"status":"failure"})
+        }
+    )
+})
+
 app.listen(8080, () => {
     console.log("server started")
 })
