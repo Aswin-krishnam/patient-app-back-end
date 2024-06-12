@@ -2,7 +2,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
 const patient = require("./models/patients")
-const {patientModel} = require("./models/patients")
+const { patientModel } = require("./models/patients")
 
 
 const app = express()
@@ -14,14 +14,25 @@ mongoose.connect("mongodb+srv://aswinkrishnam16:aswinkrishnam@cluster0.2iu51vz.m
 
 
 app.post("/", (req, res) => {
-    let input=req.body
+    let input = req.body
     let patient = new patientModel(input)
     patient.save()
     console.log(patient)
-    res.json({"status":"success"})
+    res.json({ "status": "success" })
 })
 
+app.post("/viewall", (req, res) => {
+    patientModel.find().then(
+        (data) => {
+            res.json(data)
+        }
+    ).catch(
+        (error) => {
+            res.json(error)
+        }
+    )
 
+})
 
 
 app.listen(8080, () => {
